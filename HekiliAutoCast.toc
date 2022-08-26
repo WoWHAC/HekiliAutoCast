@@ -1,0 +1,12 @@
+## Interface: 90207
+## Version: 1.7.3
+## Title: HekiliAutoCast
+## Author: CKATEPTb
+## Notes: Auxiliary addon for third party software "HekiliAutoCast".
+## Dependencies: Hekili, WeakAuras
+#@no-lib-strip@
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceEvent-3.0\AceEvent-3.0.xml
+#@end-no-lib-strip@
+
+HekiliAutoCast.lua
