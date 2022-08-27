@@ -3,14 +3,14 @@ HekiliAutoCast = LibStub("AceAddon-3.0"):NewAddon("HekiliAutoCast", "AceConsole-
 local weakAurasStatus = false
 
 local f = CreateFrame("Frame","TestBorder",UIParent)
-f:SetSize(1,1)
+f:SetSize(2,2)
 f:SetPoint("TOPLEFT")
+f:SetFrameStrata( "TOOLTIP" )
 
 
 f.back = f:CreateTexture(nil,"BACKGROUND",nil,-1)
-f.back:SetPoint("TOPLEFT",2,-2)
-f.back:SetPoint("BOTTOMRIGHT",-2,2)
-f.back:SetColorTexture(255/255,100,100)
+f.back:SetAllPoints(f)
+f.back:SetTexture(255/255,100,100)
 
 
 
