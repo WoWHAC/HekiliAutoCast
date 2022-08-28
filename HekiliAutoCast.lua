@@ -47,7 +47,6 @@ function HekiliAutoCast_Process(keyBind)
         shouldPressKeybind = keyBind
     end
     keyBind = normalizeModifiers(keyBind)
-    -- DEFAULT_CHAT_FRAME:AddMessage("Keybind: " .. keyBind)
     if CalculateIsNotChanneling() then
         local red = getRed(keyBind)
         local green = getGreen(keyBind)
@@ -89,17 +88,14 @@ function normalizeModifiers(keyBind)
     if keyBind:len() > 1 and keyBind:match("^A") ~= nil then
         withAlt = true
         keyBind = keyBind:sub(2)
-        DEFAULT_CHAT_FRAME:AddMessage("A: " .. keyBind)
     end
     if keyBind:len() > 1 and keyBind:match("^C") ~= nil then
         withCtrl = true
         keyBind = keyBind:sub(2)
-        DEFAULT_CHAT_FRAME:AddMessage("C: " .. keyBind)
     end
     if keyBind:len() > 1 and keyBind:match("^S") ~= nil then
         withShift = true
         keyBind = keyBind:sub(2)
-        DEFAULT_CHAT_FRAME:AddMessage("S: " .. keyBind)
     end
     if withShift then
         result = "SHIFT\-" .. result
