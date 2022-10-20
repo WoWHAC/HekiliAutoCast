@@ -25,8 +25,14 @@ end)
 
 -- Возвращает false если какая-то из способностей сейчас используется
 -- Необходимо, чтобы не прерывать действие текущей способности новой способностью
-local function CalculateIsNotChanneling()
+local function CalculateIsNotChanneling(recomendAbilityId)
     local channelSpell, _, _, _, channelEndTimeMS, _, _, spellId = UnitChannelInfo("player")
+    -- [Shadow Priest] позволять использовать "Взрыв разума" во время каста "Пытки разума"
+    if spellId == 15407  then
+        if recomendAbilityId == 8092 then
+            return true
+        end
+    end
     if channelSpell then
         return max(0, channelEndTimeMS/1000 - GetTime()) <= 0
     end
@@ -40,14 +46,14 @@ end
 local allowAcceptNew = false
 local shouldPressKeybind = ""
 
-function HekiliAutoCast_Process(keyBind)
+function HekiliAutoCast_Process(keyBind, recomendAbilityId)
     if keyBind == nil then
         keyBind = shouldPressKeybind
     else
         shouldPressKeybind = keyBind
     end
     keyBind = normalizeModifiers(keyBind)
-    if CalculateIsNotChanneling() then
+    if CalculateIsNotChanneling(recomendAbilityId) then
         local red = getRed(keyBind)
         local green = getGreen(keyBind)
         local blue = getBlue(keyBind)
@@ -70,13 +76,13 @@ function HekiliAutoCast_Recomend(abilityId)
         Hekili.GetBindingForAction = function ( key, display, i )
             local result, secondResult = GetBindingForAction(key, display, i)
             if allowAcceptNew then
-                HekiliAutoCast_Process(result)
+                HekiliAutoCast_Process(result, abilityId)
                 allowAcceptNew = false
             end
             return result, secondResult
         end
     end
-    HekiliAutoCast_Process()
+    HekiliAutoCast_Process(nil, abilityId)
 end
 
 function normalizeModifiers(keyBind)
