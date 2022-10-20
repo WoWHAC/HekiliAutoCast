@@ -28,7 +28,7 @@ end)
 local function CalculateIsNotChanneling(recomendAbilityId)
     local channelSpell, _, _, _, channelEndTimeMS, _, _, spellId = UnitChannelInfo("player")
     -- [Shadow Priest] позволять использовать "Взрыв разума" во время каста "Пытки разума" или "Иссушение разума"
-    if spellId == 15407 or spellId 48045 then
+    if spellId == 15407 or spellId == 48045 then
         if recomendAbilityId == 8092 then
             return true
         end
